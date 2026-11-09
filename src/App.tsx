@@ -1,13 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MapPin, Heart, CalendarPlus, Navigation, SkipForward, RotateCcw, Music, VolumeX } from 'lucide-react';
 import { weddingMusic } from './weddingMusic';
+import { WEDDING, guestFromLocation } from './guest';
+
+const GUEST = guestFromLocation();
+const COUPLE = `${WEDDING.groomName} & ${WEDDING.brideName}`;
 
 const INTRO_VIDEO = encodeURI('/gemini_generated_video_385fd4f4 (online-video-cutter.com).mp4');
 const EVENT_DATE = new Date('2026-12-07T09:57:00+05:30');
 const MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('Hotel Aknara, Panadura');
 const CALENDAR_URL =
   'https://calendar.google.com/calendar/render?action=TEMPLATE' +
-  '&text=' + encodeURIComponent('Wedding of Viranga & Umesha') +
+  '&text=' + encodeURIComponent(`Wedding of ${COUPLE}`) +
   '&dates=20261207T042700Z/20261207T103000Z' +
   '&location=' + encodeURIComponent('Hotel Aknara, No. 51/9 Sri Gnanasena Mawatha, Gorakapola - Panadura Rd, Panadura');
 
@@ -100,12 +104,19 @@ function Cover({ onOpen }: { onOpen: () => void }) {
         <Rule />
         <p className="font-script text-3xl sm:text-4xl text-[#2b2118] mt-4">Wedding of</p>
         <h1 className="font-script text-5xl sm:text-7xl leading-tight text-[#2b2118] mt-1">
-          Viranga &amp; Umesha
+          {COUPLE}
         </h1>
         <p className="font-serif-luxury text-lg sm:text-xl font-semibold tracking-[0.3em] mt-4 text-[#4a3826]">
           07 . 12 . 2026
         </p>
         <Rule className="mt-6" />
+
+        {GUEST && (
+          <div className="mt-8">
+            <p className="font-serif-luxury italic text-base sm:text-lg text-[#4a3826]">Specially for</p>
+            <p className="font-script text-4xl sm:text-5xl leading-tight mt-1">{GUEST}</p>
+          </div>
+        )}
 
         <button
           onClick={onOpen}
@@ -132,7 +143,15 @@ function Details({ onReplay }: { onReplay: () => void }) {
           <span className="font-script text-3xl sm:text-4xl">Wedding of</span>
           <span className="flex-1 h-px bg-[#2b2118]/70" />
         </div>
-        <h1 className="font-script text-5xl sm:text-7xl leading-tight mt-1">Viranga &amp; Umesha</h1>
+        <h1 className="font-script text-5xl sm:text-7xl leading-tight mt-1">{COUPLE}</h1>
+
+        {GUEST && (
+          <p className="mt-3 font-serif-luxury italic text-lg sm:text-xl text-[#3a2c1e] max-w-md mx-auto leading-snug">
+            We cordially invite{' '}
+            <span className="not-italic font-bold text-[#2b2118] whitespace-nowrap">{GUEST}</span>{' '}
+            to celebrate our special day with us.
+          </p>
+        )}
 
         <HeartRule className="mt-4" />
 
