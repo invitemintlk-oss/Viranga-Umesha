@@ -4,11 +4,11 @@ html,
 body,
 #root {
   min-height: 100%;
-  background: #050507;
+  background: #e3cfa6;
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
   overscroll-behavior-y: none;
 }
 
@@ -152,4 +152,22 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #463b20;
+}
+
+/* Wedding invitation: kraft paper card */
+.kraft-paper {
+  color: #2b2118;
+  background-color: #e3cfa6;
+  background-image:
+    radial-gradient(ellipse at 20% 15%, rgba(255, 245, 220, 0.55), transparent 55%),
+    radial-gradient(ellipse at 85% 90%, rgba(150, 110, 60, 0.25), transparent 60%),
+    radial-gradient(circle at 50% 50%, #ead9b6 0%, #d9c093 100%);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.9s ease-out both;
 }
